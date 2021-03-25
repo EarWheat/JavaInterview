@@ -66,3 +66,65 @@ public class HashCode {
 
 ![image-20210307153243348](https://img-blog.csdnimg.cn/20201127230059231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01pbmRfcHJvZ3JhbW1vbmtleQ==,size_16,color_FFFFFF,t_70)
 
+### 1.2 static和final
+#### 1.2.1一句话总结
+
+static重在**强调只有一份**，final重在**强调不变**
+
+
+
+#### 1.2.2 Static
+
+**修饰变量**：static强调的是一份副本，但是是可变的。但因为是一份副本，所有类实例**共享**，其变化是对所有可见的。
+
+**修饰方法**：基本同变量，但是static的方法不能用abstract修饰。
+
+**修饰代码块**：类加载之后就会执行代码块中的内容。
+
+#### 1.2.3 Final
+
+**修饰变量**：对于基本类型变量，初始化后不可修改其值。对于引用对象或引用数据类型，引用不可变，但引用的对象内容可变。
+
+```java
+public class StaticAndFinal {
+    public final int finalInt = 2;
+
+    static class Person{
+        String name;
+        Integer age;
+        Person(String name, Integer age){
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+    }
+    public static void main(String[] args) {
+        StaticAndFinal staticAndFina = new StaticAndFinal();
+      // staticAndFina.finalInt = 3; // 会报错：final修饰的变量不可变
+        final Person person = new Person("张三",18);
+        person.setAge(20);  // final修饰引用对象，内容可变
+      //  person = new Person("李四",30); // 会报错：final修饰的person，不可指向新的引用。
+    }
+}
+
+```
+
+**修饰方法**：不能被继承和修改
+
+**修饰类**：不能被继承
+
