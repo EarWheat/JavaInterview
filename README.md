@@ -128,3 +128,81 @@ public class StaticAndFinal {
 
 **修饰类**：不能被继承
 
+### 1.4 抽象类和接口
+
+#### 1.4 一句话总结
+
+抽象类**不能实例化**，必须由**子类实现**。一个类只能**继承一个**抽象类，但可以**实现多个**接口。
+
+
+
+#### 1.4.1 抽象类与接口的特性
+
+**抽象类：**
+
+- 抽象方法必须为public、protected。缺省时为public
+- 抽象类不能直接用来创建对象，必须由子类继承并实现其父类方法才能创建对象；
+- 只要包含一个抽象方法的抽象类，该方法必须要定义成抽象类，不管是否还包含有其他方法。
+
+**接口：**
+
+- 接口可以包含方法，方法会被隐式地指定为public abstract方法且只能是public abstract方法（用其他关键字，比如private、protected、static、 final等修饰会报编译错误），并且接口中所有的方法不能有具体的实现，也就是说，接口中的方法必须都是抽象方法；
+- 一个类可以同时继承多个接口，且需要实现所继承接口的所有方法。
+
+**区别：**
+
+- 抽象类可以提供成员方法的实现细节，而接口中只能存在public abstract 方法；
+- 抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是public static final类型的；
+- 接口中不能含有静态代码块以及静态方法，而抽象类可以有静态代码块和静态方法
+- 一个类只能继承一个抽象类，而一个类却可以实现多个接口。
+
+#### 1.4.2 什么时候使用抽象类？什么时候使用接口？
+
+这个问题也困扰了我很久，从网上看到了一篇文章，感觉说的挺对。
+
+抽象类表示它**是什么**，接口表示它能**做什么**。类似于名次和动词的区别。比如一个人他有眼睛、肤色，这些描述一个人的特征可以定义在抽象类中，而一个人的行为如打篮球，所以这些可以定义在接口中。
+
+```java
+//抽象类Person
+abstract class Person {
+    abstract void eyes();
+    abstract void skin();
+}
+
+//接口 Action
+public interface Action {
+    void playBasketball();
+}
+
+// 有个中国人，他不会打篮球
+public class Chinese extends Person {
+    @Override
+    void eyes() {
+        System.out.print("我的眼睛是黑色的");
+    }
+
+    @Override
+    void skin() {
+        System.out.print("我的皮肤是黄色的");
+    }
+}
+
+// 有个俄罗斯人，他会打篮球
+public class Russian extends Person implements Action{
+    @Override
+    void eyes() {
+        System.out.print("我的眼睛是黑色的");
+    }
+
+    @Override
+    void skin() {
+        System.out.print("我的皮肤是白色的");
+    }
+
+    @Override
+    public void playBasketball() {
+        System.out.print("我能扣篮");
+    }
+}
+```
+
