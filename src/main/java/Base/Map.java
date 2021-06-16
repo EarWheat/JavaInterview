@@ -12,9 +12,13 @@ import java.util.HashMap;
  * ------------------------------------------ *
  */
 public class Map {
+
+    public String myMethod(){
+       return "Hello";
+    }
+
     public static void main(String[] args) {
-        HashMap hashMap = new HashMap();
-        Object key = null;
-        System.out.println(key.equals(null));
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("hello","world");
     }
 }
